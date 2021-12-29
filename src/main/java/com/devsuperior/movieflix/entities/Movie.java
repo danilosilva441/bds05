@@ -1,6 +1,8 @@
 package com.devsuperior.movieflix.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,10 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_movie")
+@Table(name = "tb_movies")
 public class Movie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -22,6 +25,7 @@ public class Movie implements Serializable {
 	private Long id;
 	private String title;
 	private String subTitle;
+	private Integer year;
 	private String imgUrl;
 	
 	@Column(columnDefinition = "TEXT")
@@ -31,14 +35,18 @@ public class Movie implements Serializable {
 	@JoinColumn(name = "genre_id")
 	private Genre genre;
 	
+	@OneToMany(mappedBy = "movie")
+	private List<Review> reviews = new ArrayList<>();
+	
 	public Movie() {
 	}
 
-	public Movie(Long id, String title, String subTitle, String imgUrl, String synopsis, Genre genre) {
+	public Movie(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, Genre genre) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.subTitle = subTitle;
+		this.year = year;
 		this.imgUrl = imgUrl;
 		this.synopsis = synopsis;
 		this.genre = genre;
@@ -95,6 +103,26 @@ public class Movie implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	public String getSubTitle() {
+		return subTitle;
+	}
+
+	public void setSubTitle(String subTitle) {
+		this.subTitle = subTitle;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
 	}
 
 	@Override
