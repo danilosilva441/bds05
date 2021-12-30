@@ -1,4 +1,4 @@
-package com.devsuperior.movieflix.servicies.exceptions;
+package com.devsuperior.movieflix.services.exceptions;
 
 public class UnauthorizedException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

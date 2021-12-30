@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_movies")
+@Table(name = "tb_movie")
 public class Movie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -66,14 +66,6 @@ public class Movie implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getSubTible() {
-		return subTitle;
-	}
-
-	public void setSubTible(String subTible) {
-		this.subTitle = subTible;
 	}
 
 	public String getImgUrl() {

@@ -11,10 +11,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.devsuperior.movieflix.servicies.exceptions.DatabaseException;
-import com.devsuperior.movieflix.servicies.exceptions.ForbiddenException;
-import com.devsuperior.movieflix.servicies.exceptions.ResourceNotFoundException;
-import com.devsuperior.movieflix.servicies.exceptions.UnauthorizedException;
+import com.devsuperior.movieflix.services.exceptions.DatabaseException;
+import com.devsuperior.movieflix.services.exceptions.ForbiddenException;
+import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
+import com.devsuperior.movieflix.services.exceptions.UnauthorizedException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
