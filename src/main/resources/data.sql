@@ -25,4 +25,3 @@ INSERT INTO tb_review (user_id, movie_id, text) VALUES (3, 1, 'Filme muito bom')
 
 
 
-

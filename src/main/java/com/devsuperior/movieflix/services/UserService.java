@@ -1,6 +1,8 @@
 package com.devsuperior.movieflix.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ public class UserService implements UserDetailsService {
 	
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 	
+
 	@Autowired
 	private UserRepository repository;
 	
@@ -28,13 +31,19 @@ public class UserService implements UserDetailsService {
 	private AuthService authService;
 	
 	@Transactional(readOnly = true)
-	public UserDTO findById(Long id) {
-		authService.validateSelOrAdmin(id); //autenticador para ver se o usuario tem permição para acessar outros dados.
-		Optional<User> obj = repository.findById(id);
-		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new UserDTO(entity);
+	public List<UserDTO> findAll(){
+		List<User> list = repository.findAll();
+		return list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
 	}
 	
+	@Transactional(readOnly = true)
+	public UserDTO findById(Long id) {
+		authService.validateSelOrAdmin(id);
+		Optional<User> obj = repository.findById(id);
+		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("EntityNotFound"));
+		return new UserDTO(entity);
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
@@ -46,5 +55,10 @@ public class UserService implements UserDetailsService {
 		logger.info("User found: " + username);
 		return user;
 	}
-
+	
+    @Transactional(readOnly = true)
+    public UserDTO getProfile() {
+        return new UserDTO(authService.authenticated());
+    }
+	
 }
